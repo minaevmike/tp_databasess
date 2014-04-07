@@ -85,6 +85,9 @@ public class Functions {
         return userDetails(connection,email,"desc",null, -1, 0);
     }
 
+    public static JSONObject userDetails(Connection connection, Long id) throws  SQLException{
+        return userDetails(connection, UserDAO.getById(connection,id).getEmail());
+    }
 
     public static JSONObject postDetails(Connection connection,String forum, Integer thread, String order, String since, Integer limit, Boolean relateUser, Boolean relateThread, Boolean relateForum){
         JSONObject jsonObject = new JSONObject();

@@ -15,7 +15,7 @@ import org.w3c.dom.Entity;
  */
 public class Main {
     public static void main(String[] args) throws Exception {
-        sendForumList();
+        sendPostCreatePost();
     }
     private static void sendGetPostList(){
         HttpClient httpClient = new DefaultHttpClient();
@@ -72,6 +72,25 @@ public class Main {
             String responseEntity = EntityUtils.toString(entity,"UTF-8");
             System.out.println(responseEntity);
             // handle response here...
+        }catch (Exception ex) {
+            // handle exception here
+        } finally {
+            httpClient.getConnectionManager().shutdown();
+        }
+    }
+    private static void sendForumListUsers(){
+        HttpClient httpClient = new DefaultHttpClient();
+        try {
+            HttpGet request = new HttpGet("http://localhost:8083/db/api/forum/details?forum=forumwithsufficientlylargename&limit=2&since_id=10&order=asc");
+            //HttpPost request = new HttpPost("http://localhost:8083/db/api/user/create");
+            //StringEntity params =new StringEntity("{'username': 'ussdfer1', 'about': 'hello im user1', 'name': 'John', 'email': 'exam213dfgdfgdfgfdgdfgdfgdfg5ple@mail.ru'} ");
+            request.addHeader("content-type", "application/json");
+            //request.setEntity(params);
+            HttpResponse response = httpClient.execute(request);
+            System.out.println(response.toString());
+            HttpEntity entity = response.getEntity();
+            String responseEntity = EntityUtils.toString(entity,"UTF-8");
+            System.out.println(responseEntity);
         }catch (Exception ex) {
             // handle exception here
         } finally {
@@ -235,7 +254,7 @@ public class Main {
         HttpClient httpClient = new DefaultHttpClient();
         try {
             HttpPost request = new HttpPost("http://localhost:8083/db/api/post/create");
-            StringEntity params =new StringEntity("{'isApproved': True, 'user': 'example2@mail.ru', 'date': '2014-01-01 00:00:01', 'message': 'my message 1', 'isSpam': False, 'isHighlighted': True, 'thread': 1, 'forum': 'forumwithsufficientlylargename', 'isDeleted': False, 'isEdited': True}: ");
+            StringEntity params =new StringEntity("{'isApproved': True, 'user': 'C++@mail.ru', 'date': '2014-01-01 00:00:01', 'message': 'my message 1', 'isSpam': False, 'isHighlighted': True, 'thread': 1, 'forum': 'forumwithsufficientlylargename', 'isDeleted': False, 'isEdited': True}: ");
             request.addHeader("content-type", "application/json");
             request.setEntity(params);
             HttpResponse response = httpClient.execute(request);

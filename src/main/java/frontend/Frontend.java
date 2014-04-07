@@ -139,6 +139,10 @@ public class Frontend extends HttpServlet {
                         orm.Forum.listPosts(response,request,connection);
                         break;
                     }
+                    case "listUsers":{
+                        orm.Forum.listUsers(response,request,connection);
+                        break;
+                    }
                 }
             }
         }

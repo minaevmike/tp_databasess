@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Forum {
+    //TODO add listThreads
     public static void create(HttpServletResponse response, HttpServletRequest request, Connection connection) throws IOException {
         String json = Functions.getBody(request);
         JSONObject object = (JSONObject) new JSONTokener(json).nextValue();
@@ -86,6 +87,24 @@ public class Forum {
         }
 
         response.getWriter().println(Functions.postDetails(connection,short_name, null,order,since,limit,relateUser,relateThread,relateForum));
+    }
+    public static void listUsers(HttpServletResponse response, HttpServletRequest request, Connection connection) throws IOException {
+        String l = request.getParameter("limit");
+        String order = request.getParameter("order");
+        if(order == null){
+            order = "desc";
+        }
+        Long limit = null;
+        if(l != null){
+            limit = Long.parseLong(l);
+        }
+        String since = request.getParameter("since_id");
+        Long since_id = -1L;
+        if(since != null){
+            since_id = Long.parseLong(since);
+        }
+        String short_name = request.getParameter("forum");
+        response.getWriter().println(ForumFunctions.listUser(connection,short_name,since_id, order,limit));
     }
 
 }

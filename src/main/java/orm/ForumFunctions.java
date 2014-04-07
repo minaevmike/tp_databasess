@@ -1,9 +1,12 @@
 package orm;
 
 import database.*;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ForumFunctions {
@@ -26,4 +29,28 @@ public class ForumFunctions {
         JSONObject out = new JSONObject();
         String in  = "SELECT id, parent, isApproved, isHighlighted, isEdited, isSpam, isDeleted, DATE_FORMAT(date,'%Y-%m-%d %H:%i:%s'), thread_id, message,user_id,forum from post where removed = FALSE and forum = ?";
     }*/
+    public static JSONObject listUser(Connection connection, String short_name, Long since_id, String order, Long limit) {
+        JSONObject object = new JSONObject();
+        JSONArray out = new JSONArray();
+        String in = "SELECT DISTINCT user_id from post where forum = ? and user_id > ? ORDER BY user_id " + order ;
+        if(limit != null){
+            in += " LIMIT " + limit;
+        }
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(in);
+            preparedStatement.setString(1, short_name);
+            preparedStatement.setLong(2, since_id);
+            ResultSet rs = preparedStatement.executeQuery();
+            while(rs.next()){
+                out.put(Functions.userDetails(connection, rs.getLong(1)).getJSONObject("response"));
+            }
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+            object = Functions.errorMsg("Smth go wrong");
+        }
+        object.put("code", 0);
+        object.put("response", out);
+        return object;
+    }
 }
