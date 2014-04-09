@@ -36,8 +36,13 @@ public class Forum {
             response.getWriter().println(result);
         }
         catch (SQLException e){
-            e.printStackTrace();
-            response.getWriter().println(Functions.errorMsg("SMth go wrong"));
+            try{
+                e.printStackTrace();
+                response.getWriter().println(ForumFunctions.forumToJSON(connection,database.ForumDAO.getForumByShortForumName(connection,short_name),false));
+            }
+            catch (SQLException e1){
+                e.printStackTrace();
+            }
         }
     }
 
