@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Types;
 
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
@@ -69,10 +70,18 @@ public class User {
             System.out.println(object.getString("username"));
             String query = "INSERT INTO user (username, email, name, about, isAnonymous) VALUES(?,?,?,?,?);";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1,object.getString("username"));
+            Boolean isAn = Functions.getOptionalB(object, "isAnonymous");
+            if(isAn == false){
+                preparedStatement.setString(1,object.getString("username"));
+                preparedStatement.setString(3,object.getString("name"));
+                preparedStatement.setString(4, object.getString("about"));
+            }
+            else{
+                preparedStatement.setNull(1, Types.NULL);
+                preparedStatement.setNull(3, Types.NULL);
+                preparedStatement.setNull(4, Types.NULL);
+            }
             preparedStatement.setString(2,object.getString("email"));
-            preparedStatement.setString(3,object.getString("name"));
-            preparedStatement.setString(4, object.getString("about"));
             preparedStatement.setBoolean(5, Functions.getOptionalB(object, "isAnonymous"));
             preparedStatement.executeUpdate();
         }
@@ -109,7 +118,7 @@ public class User {
         String foolower = object.getString("follower");
         String followee = object.getString("followee");
         try {
-            String in = "INSERT INTO follows (idFollowers, idFollowing) values(?,?)";
+            String in = "INSERT INTO follows (idFollowers, idFollowing) values(?,?) ON DUPLICATE KEY idFollowers = idFollowers";
             database.User user1 = UserDAO.getByEmail(connection,foolower);
             database.User user2 = UserDAO.getByEmail(connection,followee);
             PreparedStatement preparedStatement = connection.prepareStatement(in);

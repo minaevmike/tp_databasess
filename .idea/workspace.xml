@@ -67,7 +67,7 @@
       <file leaf-file-name="Post.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/orm/Post.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="45" column="14" selection-start="2320" selection-end="2320" vertical-scroll-proportion="0.0" vertical-offset="445" max-vertical-offset="2415">
+            <state line="45" column="14" selection-start="2320" selection-end="2320" vertical-scroll-proportion="0.0" vertical-offset="675" max-vertical-offset="2535">
               <folding>
                 <marker date="1396958282026" expanded="true" signature="619:770" placeholder="INSERT INTO ..." />
                 <marker date="1396958282026" expanded="true" signature="3857:3900" placeholder="update post ..." />
@@ -79,15 +79,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="User.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="User.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/orm/User.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="50" selection-start="711" selection-end="711" vertical-scroll-proportion="0.0" vertical-offset="930" max-vertical-offset="2400">
+            <state line="117" column="55" selection-start="5048" selection-end="5048" vertical-scroll-proportion="0.5597015" vertical-offset="1260" max-vertical-offset="2520">
               <folding>
-                <marker date="1396965482730" expanded="true" signature="2689:2767" placeholder="INSERT INTO ..." />
-                <marker date="1396965482730" expanded="true" signature="4784:4842" placeholder="INSERT INTO ..." />
-                <marker date="1396965482730" expanded="true" signature="5917:5978" placeholder="delete from ..." />
-                <marker date="1396965482730" expanded="true" signature="7091:7142" placeholder="UPDATE user ..." />
+                <marker date="1397053359296" expanded="true" signature="2712:2790" placeholder="INSERT INTO ..." />
+                <marker date="1397053359296" expanded="true" signature="5144:5245" placeholder="INSERT INTO ..." />
+                <marker date="1397053359296" expanded="true" signature="6320:6381" placeholder="delete from ..." />
+                <marker date="1397053359296" expanded="true" signature="7494:7545" placeholder="UPDATE user ..." />
               </folding>
             </state>
           </provider>
@@ -105,7 +105,7 @@
       <file leaf-file-name="ForumFunctions.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/orm/ForumFunctions.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="44" column="78" selection-start="2088" selection-end="2093" vertical-scroll-proportion="0.0" vertical-offset="660" max-vertical-offset="930">
+            <state line="44" column="78" selection-start="2088" selection-end="2093" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="825">
               <folding>
                 <marker date="1396947558845" expanded="true" signature="1551:1634" placeholder="SELECT DISTI..post..." />
               </folding>
@@ -116,7 +116,7 @@
       <file leaf-file-name="Functions.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/orm/Functions.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="71" column="77" selection-start="2607" selection-end="2607" vertical-scroll-proportion="0.0" vertical-offset="593" max-vertical-offset="4260">
+            <state line="71" column="77" selection-start="2607" selection-end="2607" vertical-scroll-proportion="0.0" vertical-offset="3737" max-vertical-offset="4260">
               <folding>
                 <marker date="1397025007466" expanded="true" signature="3183:3232" placeholder="SELECT threa..subscribe..." />
                 <marker date="1397025007466" expanded="true" signature="4131:4313" placeholder="SELECT id, p..post..." />
@@ -141,7 +141,7 @@
       <file leaf-file-name="Thread.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/orm/Thread.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="273" column="41" selection-start="12693" selection-end="12693" vertical-scroll-proportion="0.0" vertical-offset="3677" max-vertical-offset="4215">
+            <state line="273" column="41" selection-start="12693" selection-end="12693" vertical-scroll-proportion="0.0" vertical-offset="3679" max-vertical-offset="4215">
               <folding>
                 <marker date="1397021907446" expanded="true" signature="1121:1231" placeholder="INSERT INTO ..." />
                 <marker date="1397021907446" expanded="true" signature="2850:2896" placeholder="UPDATE threa..." />
@@ -158,19 +158,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Frontend.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Frontend.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/frontend/Frontend.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="125" column="13" selection-start="4346" selection-end="4346" vertical-scroll-proportion="0.78571427" vertical-offset="1315" max-vertical-offset="2925">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Main.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/send/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="63" column="105" selection-start="2989" selection-end="3029" vertical-scroll-proportion="0.0" vertical-offset="750" max-vertical-offset="4335">
+            <state line="125" column="13" selection-start="4346" selection-end="4346" vertical-scroll-proportion="0.0" vertical-offset="1875" max-vertical-offset="2925">
               <folding />
             </state>
           </provider>
@@ -179,11 +170,20 @@
       <file leaf-file-name="ThreadFunctions.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/orm/ThreadFunctions.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="152" column="76" selection-start="6298" selection-end="6298" vertical-scroll-proportion="0.0" vertical-offset="1933" max-vertical-offset="2265">
+            <state line="152" column="76" selection-start="6298" selection-end="6298" vertical-scroll-proportion="0.0" vertical-offset="1292" max-vertical-offset="2265">
               <folding>
                 <marker date="1397022549722" expanded="true" signature="1842:1887" placeholder="SELECT COUNT..post..." />
                 <marker date="1397022549722" expanded="true" signature="4439:4668" placeholder="SELECT t.id,..thread..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Main.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/send/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="63" column="105" selection-start="2989" selection-end="3029" vertical-scroll-proportion="0.0" vertical-offset="945" max-vertical-offset="4455">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -215,7 +215,6 @@
         <option value="$PROJECT_DIR$/src/main/java/database/Thread.java" />
         <option value="$PROJECT_DIR$/src/main/java/orm/Post.java" />
         <option value="$PROJECT_DIR$/src/main/java/database/DataService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/orm/User.java" />
         <option value="$PROJECT_DIR$/src/main/java/send/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/orm/edfssf.java" />
         <option value="$PROJECT_DIR$/src/main/java/orm/Thread.java" />
@@ -223,6 +222,7 @@
         <option value="$PROJECT_DIR$/src/main/java/orm/Forum.java" />
         <option value="$PROJECT_DIR$/src/main/java/orm/Functions.java" />
         <option value="$PROJECT_DIR$/src/main/java/frontend/Frontend.java" />
+        <option value="$PROJECT_DIR$/src/main/java/orm/User.java" />
       </list>
     </option>
   </component>
@@ -268,7 +268,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -419,6 +418,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -729,11 +729,12 @@
       <workItem from="1396944453904" duration="13571000" />
       <workItem from="1396964518862" duration="2420000" />
       <workItem from="1397020423035" duration="4502000" />
+      <workItem from="1397052825993" duration="528000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="75389000" />
+    <option name="totallyTimeSpent" value="75917000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -772,18 +773,18 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32478634" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32879046" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21148036" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31794873" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31743422" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32478634" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -808,6 +809,16 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/orm/ThreadFunctions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="152" column="76" selection-start="6298" selection-end="6298" vertical-scroll-proportion="0.0" vertical-offset="2280" max-vertical-offset="2400">
+          <folding>
+            <marker date="1397022549722" expanded="true" signature="1842:1887" placeholder="SELECT COUNT..post..." />
+            <marker date="1397022549722" expanded="true" signature="4439:4668" placeholder="SELECT t.id,..thread..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/orm/Forum.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="16" column="26" selection-start="425" selection-end="425" vertical-scroll-proportion="0.0" vertical-offset="240" max-vertical-offset="1455">
@@ -824,16 +835,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/database/PostDAO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="154" selection-start="1413" selection-end="1413" vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="663">
-          <folding />
-        </state>
+        <state line="29" column="154" selection-start="1413" selection-end="1413" vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="663" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/main/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="61" selection-start="391" selection-end="448" vertical-scroll-proportion="0.0" vertical-offset="221" max-vertical-offset="578">
-          <folding />
-        </state>
+        <state line="13" column="61" selection-start="391" selection-end="448" vertical-scroll-proportion="0.0" vertical-offset="221" max-vertical-offset="578" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/database/handlers/ResultHandler.java">
@@ -858,9 +865,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/database/User.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="11" selection-start="922" selection-end="922" vertical-scroll-proportion="0.0" vertical-offset="556" max-vertical-offset="1139">
-          <folding />
-        </state>
+        <state line="48" column="11" selection-start="922" selection-end="922" vertical-scroll-proportion="0.0" vertical-offset="556" max-vertical-offset="1139" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/frontend/Frontend.java">
@@ -923,9 +928,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/main/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="39" selection-start="503" selection-end="503" vertical-scroll-proportion="0.0" vertical-offset="238" max-vertical-offset="561">
-          <folding />
-        </state>
+        <state line="14" column="39" selection-start="503" selection-end="503" vertical-scroll-proportion="0.0" vertical-offset="238" max-vertical-offset="561" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/database/DataService.java">
@@ -947,9 +950,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/main/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="39" selection-start="503" selection-end="503" vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="561">
-          <folding />
-        </state>
+        <state line="14" column="39" selection-start="503" selection-end="503" vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="561" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
@@ -1006,18 +1007,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/database/ThreadDAO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="10" selection-start="924" selection-end="1034" vertical-scroll-proportion="0.0" vertical-offset="15" max-vertical-offset="330">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/orm/ForumFunctions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="78" selection-start="2088" selection-end="2093" vertical-scroll-proportion="0.0" vertical-offset="660" max-vertical-offset="930">
-          <folding>
-            <marker date="1396947558845" expanded="true" signature="1551:1634" placeholder="SELECT DISTI..post..." />
-          </folding>
-        </state>
+        <state line="20" column="10" selection-start="924" selection-end="1034" vertical-scroll-proportion="0.0" vertical-offset="15" max-vertical-offset="330" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/database/Thread.java">
@@ -1034,9 +1024,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/database/PostDAO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="154" selection-start="1091" selection-end="1128" vertical-scroll-proportion="0.5535714" vertical-offset="39" max-vertical-offset="375">
-          <folding />
-        </state>
+        <state line="24" column="154" selection-start="1091" selection-end="1128" vertical-scroll-proportion="0.5535714" vertical-offset="39" max-vertical-offset="375" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/database/Post.java">
@@ -1048,15 +1036,56 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/database/User.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="11" selection-start="922" selection-end="922" vertical-scroll-proportion="0.0" vertical-offset="64" max-vertical-offset="645">
-          <folding />
-        </state>
+        <state line="48" column="11" selection-start="922" selection-end="922" vertical-scroll-proportion="0.0" vertical-offset="64" max-vertical-offset="645" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/main/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="61" selection-start="391" selection-end="448" vertical-scroll-proportion="0.0" vertical-offset="43" max-vertical-offset="405">
+        <state line="13" column="61" selection-start="391" selection-end="448" vertical-scroll-proportion="0.0" vertical-offset="43" max-vertical-offset="405" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/orm/Post.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="45" column="14" selection-start="2320" selection-end="2320" vertical-scroll-proportion="0.0" vertical-offset="445" max-vertical-offset="2415">
+          <folding>
+            <marker date="1396958282026" expanded="true" signature="619:770" placeholder="INSERT INTO ..." />
+            <marker date="1396958282026" expanded="true" signature="3857:3900" placeholder="update post ..." />
+            <marker date="1396958282026" expanded="true" signature="4877:4921" placeholder="update post ..." />
+            <marker date="1396958282026" expanded="true" signature="5953:5993" placeholder="update post ..." />
+            <marker date="1396958282026" expanded="true" signature="7050:7097" placeholder="INSERT INTO ..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/send/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="63" column="105" selection-start="2989" selection-end="3029" vertical-scroll-proportion="0.0" vertical-offset="750" max-vertical-offset="4335">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/frontend/Frontend.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="125" column="13" selection-start="4346" selection-end="4346" vertical-scroll-proportion="0.0" vertical-offset="1875" max-vertical-offset="2925">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/orm/Forum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="53" column="0" selection-start="2330" selection-end="2330" vertical-scroll-proportion="0.0" vertical-offset="158" max-vertical-offset="1875">
+          <folding>
+            <marker date="1397022549718" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/orm/ForumFunctions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="78" selection-start="2088" selection-end="2093" vertical-scroll-proportion="0.0" vertical-offset="660" max-vertical-offset="930">
+          <folding>
+            <marker date="1396947558845" expanded="true" signature="1551:1634" placeholder="SELECT DISTI..post..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1088,47 +1117,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/orm/Post.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="14" selection-start="2320" selection-end="2320" vertical-scroll-proportion="0.0" vertical-offset="445" max-vertical-offset="2415">
-          <folding>
-            <marker date="1396958282026" expanded="true" signature="619:770" placeholder="INSERT INTO ..." />
-            <marker date="1396958282026" expanded="true" signature="3857:3900" placeholder="update post ..." />
-            <marker date="1396958282026" expanded="true" signature="4877:4921" placeholder="update post ..." />
-            <marker date="1396958282026" expanded="true" signature="5953:5993" placeholder="update post ..." />
-            <marker date="1396958282026" expanded="true" signature="7050:7097" placeholder="INSERT INTO ..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/send/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="105" selection-start="2989" selection-end="3029" vertical-scroll-proportion="0.0" vertical-offset="750" max-vertical-offset="4335">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/orm/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="50" selection-start="711" selection-end="711" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2400">
-          <folding>
-            <marker date="1396965482730" expanded="true" signature="2689:2767" placeholder="INSERT INTO ..." />
-            <marker date="1396965482730" expanded="true" signature="4784:4842" placeholder="INSERT INTO ..." />
-            <marker date="1396965482730" expanded="true" signature="5917:5978" placeholder="delete from ..." />
-            <marker date="1396965482730" expanded="true" signature="7091:7142" placeholder="UPDATE user ..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/orm/Forum.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="0" selection-start="2330" selection-end="2330" vertical-scroll-proportion="0.3323442" vertical-offset="518" max-vertical-offset="1875">
-          <folding>
-            <marker date="1397022549718" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/orm/Functions.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="71" column="77" selection-start="2607" selection-end="2607" vertical-scroll-proportion="0.0" vertical-offset="593" max-vertical-offset="4260">
@@ -1143,10 +1131,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/frontend/Frontend.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/orm/User.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="125" column="13" selection-start="4346" selection-end="4346" vertical-scroll-proportion="0.78571427" vertical-offset="1315" max-vertical-offset="2925">
-          <folding />
+        <state line="117" column="55" selection-start="5048" selection-end="5048" vertical-scroll-proportion="0.5597015" vertical-offset="1260" max-vertical-offset="2520">
+          <folding>
+            <marker date="1397053359296" expanded="true" signature="2712:2790" placeholder="INSERT INTO ..." />
+            <marker date="1397053359296" expanded="true" signature="5144:5245" placeholder="INSERT INTO ..." />
+            <marker date="1397053359296" expanded="true" signature="6320:6381" placeholder="delete from ..." />
+            <marker date="1397053359296" expanded="true" signature="7494:7545" placeholder="UPDATE user ..." />
+          </folding>
         </state>
       </provider>
     </entry>
