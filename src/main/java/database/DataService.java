@@ -20,7 +20,7 @@ public class DataService {
                         append("3306/").				//port
                         append("forums?").			//db name
                         append("user=root&").	    //login
-                        append("password=1234");		//password
+                        append("password=1");		//password
 
                 System.out.append("URL: " + url + "\n");
                 connection = DriverManager.getConnection(url.toString());

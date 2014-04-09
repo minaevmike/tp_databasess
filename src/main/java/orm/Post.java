@@ -56,18 +56,18 @@ public class Post {
     public static void list(HttpServletResponse response, HttpServletRequest request, Connection connection) throws IOException {
         String forum = request.getParameter("forum");
         String thread = request.getParameter("thread");
-        Integer thread_id = null;
+        Long thread_id = null;
         if(thread != null){
-            thread_id = Integer.parseInt(thread);
+            thread_id = Long.parseLong(thread);
         }
         String order = request.getParameter("order");
         if(order == null){
             order = "desc";
         }
         String l = request.getParameter("limit");
-        Integer limit = null;
+        Long limit = null;
         if(l != null){
-            limit = Integer.parseInt(l);
+            limit = Long.parseLong(l);
         }
         String since = request.getParameter("since");
         response.getWriter().println(Functions.postDetails(connection, forum, thread_id, order, since, limit,false,false,false));

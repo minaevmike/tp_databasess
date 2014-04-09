@@ -15,7 +15,7 @@ import org.w3c.dom.Entity;
  */
 public class Main {
     public static void main(String[] args) throws Exception {
-        sendPostCreatePost();
+        sendPost();
     }
     private static void sendGetPostList(){
         HttpClient httpClient = new DefaultHttpClient();
@@ -273,7 +273,7 @@ public class Main {
         HttpClient httpClient = new DefaultHttpClient();
         try {
             HttpPost request = new HttpPost("http://localhost:8083/db/api/user/create");
-            StringEntity params =new StringEntity("{'username': 'ussdfer1', 'about': 'hello im user1', 'name': 'C++', 'email': 'C++@mail.ru'} ");
+            StringEntity params =new StringEntity("{'username': none, 'about': 'hello im user1', 'name': 'C++', 'email': 'C++@mail.ru'} ");
             request.addHeader("content-type", "application/json");
             request.setEntity(params);
             HttpResponse response = httpClient.execute(request);

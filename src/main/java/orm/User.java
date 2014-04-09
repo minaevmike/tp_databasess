@@ -66,6 +66,7 @@ public class User {
         String json = Functions.getBody(request);
         JSONObject object = (JSONObject) new JSONTokener(json).nextValue();
         try {
+            System.out.println(object.getString("username"));
             String query = "INSERT INTO user (username, email, name, about, isAnonymous) VALUES(?,?,?,?,?);";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1,object.getString("username"));

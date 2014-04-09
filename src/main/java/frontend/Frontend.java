@@ -32,6 +32,43 @@ public class Frontend extends HttpServlet {
         String [] params = param.split("/");
         Connection connection = DataService.getConnection();
         switch (params[3]){
+            case "thread":{
+               switch (params[4]){
+                    case "create":{
+                        orm.Thread.create(response,request,connection);
+                        break;
+                    }
+                   case "close":{
+                       orm.Thread.close(response,request,connection);
+                       break;
+                   }
+                   case "open":{
+                       orm.Thread.open(response,request,connection);
+                       break;
+                   }
+                   case "remove":{
+                       orm.Thread.remove(response,request,connection);
+                       break;
+                   }
+                   case "restore":{
+                       orm.Thread.restore(response,request,connection);
+                       break;
+                   }
+                   case "subscribe":{
+                       orm.Thread.subscribe(response,request,connection);
+                       break;
+                   }
+                   case "unsubscribe":{
+                       orm.Thread.unsubscribe(response,request,connection);
+                       break;
+                   }
+                   case "update":{
+                       orm.Thread.update(response,request,connection);
+                       break;
+                   }
+                }
+            }
+            break;
             case "user": {
                 switch (params[4]){
                     case "create":{
@@ -62,7 +99,6 @@ public class Frontend extends HttpServlet {
                     case "remove":{
                         orm.Post.remove(response,request,connection);
                         break;
-                        //Integer id = object.getInt("post");
                     }
                     case "restore":{
                         orm.Post.restore(response,request,connection);
@@ -100,6 +136,23 @@ public class Frontend extends HttpServlet {
         String [] params = param.split("/");
         Connection connection = DataService.getConnection();
         switch (params[3]){
+            case "thread":{
+                switch (params[4]){
+                    case "details":{
+                        orm.Thread.details(response,request,connection);
+                        break;
+                    }
+                    case "list":{
+                        orm.Thread.list(response,request,connection);
+                        break;
+                    }
+                    case "listPosts":{
+                        orm.Thread.listPosts(response,request,connection);
+                        break;
+                    }
+                }
+                break;
+            }
             case "user":{
                 switch (params[4]){
                     case "details":{
@@ -131,7 +184,6 @@ public class Frontend extends HttpServlet {
             case "forum":{
                 switch (params[4]){
                     case "details":{
-                        System.out.println("OUT");
                         orm.Forum.details(response, request, connection);
                         break;
                     }

@@ -17,7 +17,7 @@ public class ForumFunctions {
         object.put("short_name", forum.getShort_name());
         String email = database.UserDAO.getById(connection, forum.getUser()).getEmail();
         if(related_user){
-            object.put("user", Functions.userDetails(connection,email));
+            object.put("user", Functions.userDetails(connection,email).getJSONObject("response"));
         }
         else{
             object.put("user", email);

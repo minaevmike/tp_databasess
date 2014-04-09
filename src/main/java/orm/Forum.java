@@ -14,7 +14,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Forum {
-    //TODO add listThreads
     public static void create(HttpServletResponse response, HttpServletRequest request, Connection connection) throws IOException {
         String json = Functions.getBody(request);
         JSONObject object = (JSONObject) new JSONTokener(json).nextValue();
@@ -70,9 +69,9 @@ public class Forum {
         if(order == null){
             order = "desc";
         }
-        Integer limit = null;
+        Long limit = null;
         if(l != null){
-            limit = Integer.parseInt(l);
+            limit = Long.parseLong(l);
         }
         String since = request.getParameter("since");
         String related = request.getParameter("related");
@@ -107,4 +106,25 @@ public class Forum {
         response.getWriter().println(ForumFunctions.listUser(connection,short_name,since_id, order,limit));
     }
 
+    public static void listThreads(HttpServletResponse response, HttpServletRequest request, Connection connection) throws IOException {
+                String l = request.getParameter("limit");
+                String order = request.getParameter("order");
+                if(order == null){
+                    order = "desc";
+                }
+                Long limit = null;
+                if(l != null){
+                    limit = Long.parseLong(l);
+                }
+                String since = request.getParameter("since");
+                String related = request.getParameter("related");
+                String short_name = request.getParameter("forum");
+                Boolean relateUser = false;
+                Boolean relateForum = false;
+                if (related != null){
+                    relateUser =  related.contains("user");
+                    relateForum = related.contains("forum");
+                }
+        response.getWriter().println(ThreadFunctions.list(connection,null,short_name,since,order,limit,relateUser,relateForum));
+    }
 }

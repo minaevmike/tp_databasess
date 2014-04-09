@@ -4,8 +4,9 @@ package database;
 public class Thread {
     Long id;
 
-    public Thread(Long id, Long forum, String title, String date, String message, String slug, Boolean isDeleted, Boolean isClosed) {
+    public Thread(Long id, Long user,Long forum, String title, String date, String message, String slug, Boolean isDeleted, Boolean isClosed) {
         this.id = id;
+        this.user = user;
         this.forum = forum;
         this.title = title;
         this.date = date;
@@ -79,11 +80,36 @@ public class Thread {
         this.isDeleted = isDeleted;
     }
 
+    Long user;
+    String userN;
     Long forum;
+    String forumN;
+
+    public Thread(Long id, String userN, String forumN, String date, String title, String message, String slug, Boolean isDeleted, Boolean isClosed) {
+        this.id = id;
+        this.userN = userN;
+        this.forumN = forumN;
+        this.date = date;
+        this.title = title;
+        this.message = message;
+        this.slug = slug;
+        this.isDeleted = isDeleted;
+        this.isClosed = isClosed;
+    }
+
     String title;
     String date;
     String message;
     String slug;
     Boolean isDeleted;
     Boolean isClosed;
+
+
+    public Long getUser() {
+        return user;
+    }
+
+    public void setUser(Long user) {
+        this.user = user;
+    }
 }

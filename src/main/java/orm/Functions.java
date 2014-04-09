@@ -89,7 +89,7 @@ public class Functions {
         return userDetails(connection, UserDAO.getById(connection,id).getEmail());
     }
 
-    public static JSONObject postDetails(Connection connection,String forum, Integer thread, String order, String since, Integer limit, Boolean relateUser, Boolean relateThread, Boolean relateForum){
+    public static JSONObject postDetails(Connection connection,String forum, Long thread, String order, String since, Long limit, Boolean relateUser, Boolean relateThread, Boolean relateForum){
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
         String in = "SELECT id, parent, isApproved, isHighlighted, isEdited, isSpam, isDeleted, DATE_FORMAT(date,'%Y-%m-%d %H:%i:%s'), thread_id, message,user_id,forum from post where removed = FALSE and ";
@@ -112,7 +112,7 @@ public class Functions {
                 preparedStatement.setString(1,forum);
             }
             else {
-                preparedStatement.setInt(1,thread);
+                preparedStatement.setLong(1,thread);
             }
             if(since != null){
                 preparedStatement.setString(2, since);
@@ -174,7 +174,12 @@ public class Functions {
         out.put("isHighlighted", post.isHighlighted());
         out.put("isSpam", post.isSpam());
         out.put("message", post.getMessage());
-        out.put("thread", post.getThread());
+        if(relateThread){
+            out.put("thread", ThreadFunctions.threadDetails(connection,post.getThread(),false,false));
+        }
+        else {
+            out.put("thread", post.getThread());
+        }
         String email = database.UserDAO.getById(connection, post.getUser()).getEmail();
         if(relateUser){
             out.put("user", Functions.userDetails(connection,email).getJSONObject("response"));
