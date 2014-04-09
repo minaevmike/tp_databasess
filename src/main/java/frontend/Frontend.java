@@ -67,8 +67,8 @@ public class Frontend extends HttpServlet {
                        break;
                    }
                 }
+                break;
             }
-            break;
             case "user": {
                 switch (params[4]){
                     case "create":{
@@ -135,6 +135,7 @@ public class Frontend extends HttpServlet {
         String param = request.getPathInfo();
         String [] params = param.split("/");
         Connection connection = DataService.getConnection();
+        System.out.println(param);
         switch (params[3]){
             case "thread":{
                 switch (params[4]){
@@ -169,6 +170,7 @@ public class Frontend extends HttpServlet {
                     }
 
                 }
+                break;
             }
             case "post":{
                 switch (params[4]){
@@ -180,6 +182,7 @@ public class Frontend extends HttpServlet {
                         break;
                     }
                 }
+                break;
             }
             case "forum":{
                 switch (params[4]){
@@ -196,6 +199,7 @@ public class Frontend extends HttpServlet {
                         break;
                     }
                 }
+                break;
             }
         }
     }

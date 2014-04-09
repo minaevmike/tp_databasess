@@ -69,6 +69,7 @@ public class Functions {
                 responseJSON.put("followers",getFollowers(email,connection));
                 responseJSON.put("following",getFollowing(email,connection));
             }
+            responseJSON.put("subscriptions", subs(connection,user.getId()));
             result.put("response", responseJSON);
 
         }
@@ -83,6 +84,23 @@ public class Functions {
     }
     public static JSONObject userDetails(Connection connection,String email){
         return userDetails(connection,email,"desc",null, -1, 0);
+    }
+
+    public static JSONArray subs(Connection connection, Long id){
+        JSONArray out = new JSONArray();
+        String in = "SELECT thread_id from subscribe where user_id = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(in);
+            preparedStatement.setLong(1,id);
+            ResultSet rs = preparedStatement.executeQuery();
+            while(rs.next()){
+                out.put(rs.getLong(1));
+            }
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+        return out;
     }
 
     public static JSONObject userDetails(Connection connection, Long id) throws  SQLException{
@@ -152,7 +170,6 @@ public class Functions {
         return  out;
     }
     public static JSONObject postToJSON(Connection connection, database.Post post, Boolean relateUser, Boolean relateThread,Boolean relateForum) throws  SQLException{
-        //TODO ADD relateThread
         JSONObject out = new JSONObject();
         out.put("date", post.getDate());
         if(relateForum){
