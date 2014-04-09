@@ -32,18 +32,20 @@ public class Forum {
             ResultSet keys = preparedStatement.getGeneratedKeys();
             keys.next();
             Long id = keys.getLong(1);
-            result.put("code", 0);
-            result.put("response", ForumFunctions.forumToJSON(connection, database.ForumDAO.getForumById(connection, id),false));
-            response.getWriter().println(result);
+
         }
         catch (MySQLIntegrityConstraintViolationException e){
         }
         catch (SQLException e){
+            e.printStackTrace();
+        }
+        finally {
             try{
-                e.printStackTrace();
-                response.getWriter().println(ForumFunctions.forumToJSON(connection,database.ForumDAO.getForumByShortForumName(connection,short_name),false));
+            result.put("code", 0);
+            result.put("response", ForumFunctions.forumToJSON(connection, database.ForumDAO.getForumByShortForumName(connection,short_name),false));
+            response.getWriter().println(result);
             }
-            catch (SQLException e1){
+            catch (SQLException e){
                 e.printStackTrace();
             }
         }
