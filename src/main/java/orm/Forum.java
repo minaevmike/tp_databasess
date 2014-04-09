@@ -1,5 +1,6 @@
 package orm;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import database.UserDAO;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -34,6 +35,8 @@ public class Forum {
             result.put("code", 0);
             result.put("response", ForumFunctions.forumToJSON(connection, database.ForumDAO.getForumById(connection, id),false));
             response.getWriter().println(result);
+        }
+        catch (MySQLIntegrityConstraintViolationException e){
         }
         catch (SQLException e){
             try{

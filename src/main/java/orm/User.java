@@ -85,7 +85,6 @@ public class User {
             preparedStatement.executeUpdate();
         }
         catch (MySQLIntegrityConstraintViolationException e){
-
         }
         catch (Exception e){
             e.printStackTrace();
