@@ -51,12 +51,20 @@ public class Functions {
             database.User user = UserDAO.getByEmail(connection, email);
             result.put("code", 0);
             JSONObject responseJSON = new JSONObject();
-            responseJSON.put("about", user.getAbout());
+            Boolean isAn = user.getIsAnonymous();
+            if(isAn == false){
+                responseJSON.put("about", user.getAbout());
+                responseJSON.put("name", user.getName());
+                responseJSON.put("username", user.getUsername());
+            }
+            else{
+                responseJSON.put("about", JSONObject.NULL);
+                responseJSON.put("name", JSONObject.NULL);
+                responseJSON.put("username", JSONObject.NULL);
+            }
             responseJSON.put("email", user.getEmail());
             responseJSON.put("id", user.getId());
             responseJSON.put("isAnonymous", user.getIsAnonymous());
-            responseJSON.put("name", user.getName());
-            responseJSON.put("username", user.getUsername());
             if(type == 1 ){
                 responseJSON.put("followers",getFollowers(email,connection,order,limit,since_id));
                 responseJSON.put("following",getFollowing(email,connection));

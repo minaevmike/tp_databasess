@@ -97,12 +97,20 @@ public class User {
                 JSONObject result = new JSONObject();
                 result.put("code", 0);
                 JSONObject responseJSON = new JSONObject();
-                responseJSON.put("about", user.getAbout());
-                responseJSON.put("email", user.getEmail());
-                responseJSON.put("id", user.getId());
+                Boolean isAn = user.getIsAnonymous();
+                if(isAn == false){
+                    responseJSON.put("about", user.getAbout());
+                    responseJSON.put("name", user.getName());
+                    responseJSON.put("username", user.getUsername());
+                }
+                else{
+                    responseJSON.put("about", JSONObject.NULL);
+                    responseJSON.put("name", JSONObject.NULL);
+                    responseJSON.put("username", JSONObject.NULL);
+                }
                 responseJSON.put("isAnonymous", user.getIsAnonymous());
-                responseJSON.put("name", user.getName());
-                responseJSON.put("username", user.getUsername());
+                responseJSON.put("id", user.getId());
+                responseJSON.put("email", user.getEmail());
                 result.put("response", responseJSON);
                 System.out.println(result.toString());
                 response.getWriter().println(result.toString());
