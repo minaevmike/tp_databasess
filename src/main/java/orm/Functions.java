@@ -1,9 +1,12 @@
 package orm;
 
 import database.*;
+import database.User;
+import javafx.beans.property.SimpleStringProperty;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import sun.reflect.generics.tree.SimpleClassTypeSignature;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
@@ -20,7 +23,7 @@ import java.sql.SQLException;
  */
 public class Functions {
     public static Boolean getOptionalB(JSONObject object, String paramName){
-        Boolean out;
+        Boolean out = false;
         try {
             out = object.getBoolean(paramName);
         }
@@ -29,6 +32,18 @@ public class Functions {
         }
         return out;
     }
+
+    public static Long getOptionalL(JSONObject object, String paramName){
+        Long out;
+        try {
+            out = object.getLong(paramName);
+        }
+        catch (JSONException e){
+            out = null;
+        }
+        return out;
+    }
+
     public static Integer getOptionalI(JSONObject object, String paramName){
         Integer out;
         try{
@@ -45,10 +60,10 @@ public class Functions {
         result.put("message", msg);
         return result;
     }
-    public static JSONObject userDetails(Connection connection, String email,String order, Integer limit, Integer since_id, Integer type ){
+
+    public static JSONObject userDetails(Connection connection, User user){
         JSONObject result = new JSONObject();
-        try{
-            database.User user = UserDAO.getByEmail(connection, email);
+            String email = user.getEmail();
             result.put("code", 0);
             JSONObject responseJSON = new JSONObject();
             Boolean isAn = user.getIsAnonymous();
@@ -65,38 +80,28 @@ public class Functions {
             responseJSON.put("email", user.getEmail());
             responseJSON.put("id", user.getId());
             responseJSON.put("isAnonymous", user.getIsAnonymous());
-            if(type == 1 ){
-                responseJSON.put("followers",getFollowers(email,connection,order,limit,since_id));
-                responseJSON.put("following",getFollowing(email,connection));
-            }
-            if(type == 2){
-                responseJSON.put("following",getFollowing(email,connection,order,limit,since_id));
-                responseJSON.put("followers",getFollowers(email,connection));
-            }
-            if(type == 0){
-                responseJSON.put("followers",getFollowers(email,connection));
-                responseJSON.put("following",getFollowing(email,connection));
-            }
+            responseJSON.put("followers",getFollowers(email,connection));
+            responseJSON.put("following",getFollowing(email,connection));
             responseJSON.put("subscriptions", subs(connection,user.getId()));
             result.put("response", responseJSON);
 
-        }
-        catch (SQLException e){
-            result.put("code", 1);
-            result.put("message", "No such user");
-        }
-        finally {
-            System.out.println(result.toString());
-        }
+
         return result;
     }
-    public static JSONObject userDetails(Connection connection,String email){
-        return userDetails(connection,email,"desc",null, -1, 0);
+
+    public static JSONObject userDetails(Connection connection, String email){
+        try{
+            database.User user = UserDAO.getByEmail(connection, email);
+            return userDetails(connection,user);
+        }
+        catch (SQLException e){
+            return Functions.errorMsg("Smth go wrong");
+        }
     }
 
     public static JSONArray subs(Connection connection, Long id){
         JSONArray out = new JSONArray();
-        String in = "SELECT thread_id from subscribe where user_id = ?";
+        String in = "SELECT thread_id from subscribe where user_id = ? and deleted = false";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(in);
             preparedStatement.setLong(1,id);
@@ -159,6 +164,40 @@ public class Functions {
         }
         return jsonObject;
     }
+
+    public static JSONObject postDetails(Connection connection, Long id, String order, String since, Long limit, Boolean relateUser, Boolean relateThread, Boolean relateForum){
+        JSONObject jsonObject = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+        String in = "SELECT id, parent, isApproved, isHighlighted, isEdited, isSpam, isDeleted, DATE_FORMAT(date,'%Y-%m-%d %H:%i:%s'), thread_id, message,user_id,forum from post where ";
+        in = in + " id = ? ";
+        if(since != null){
+            in += " and date > ? ";
+        }
+        in += " ORDER  BY date " + order;
+        if(limit != null){
+            in += " limit " + limit.toString();
+        }
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(in);
+            preparedStatement.setLong(1,id);
+            if(since != null){
+                preparedStatement.setString(2, since);
+            }
+            System.out.println(preparedStatement);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            database.Post post = new database.Post(resultSet.getLong(1),resultSet.getLong(2),resultSet.getBoolean(3),resultSet.getBoolean(4),resultSet.getBoolean(5),
+                        resultSet.getBoolean(6),resultSet.getBoolean(7),resultSet.getString(8),resultSet.getLong(9),resultSet.getString(10),resultSet.getLong(11),resultSet.getString(12));
+            jsonObject.put("code", 0);
+            jsonObject.put("response", postToJSON(connection,post,relateUser,relateThread,relateForum));
+        }
+        catch (SQLException e){
+            jsonObject = errorMsg("Smth goes wrong");
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+
     public static Long votes(Connection connection,Long id, Integer type, Integer value){
         String in = "SELECT COUNT(*) FROM vote where type = ? and id = ? and value = ?";
         Long out;
@@ -167,6 +206,7 @@ public class Functions {
             preparedStatement.setInt(1, type);
             preparedStatement.setLong(2, id);
             preparedStatement.setInt(3, value);
+            System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
             rs.next();
             out = rs.getLong(1);
@@ -187,6 +227,12 @@ public class Functions {
             out.put("forum", post.getForum());
         }
         out.put("id", post.getId());
+        System.out.println(post.getParent());
+        if(post.getParent() ==null || post.getParent() == 0){
+            out.put("parent", JSONObject.NULL);
+        }else {
+            out.put("parent",post.getParent());
+        }
         out.put("isApproved", post.isApproved());
         out.put("isDeleted", post.isDeleted());
         out.put("isEdited", post.isEdited());
@@ -215,40 +261,13 @@ public class Functions {
         return out;
     }
 
-    public static JSONArray getFollowers(String email, Connection connection, String order, Integer limit, Integer since_id){
-        JSONArray responseJSON = new JSONArray();
-        String in = "SELECT u1.email FROM follows f JOIN user u on u.id = f.idFollowers JOIN user u1 on u1.id = f.idFollowing where u.email = ? and u1.id > ? order by u1.name " + order;
-        if(limit != null){
-            in += " limit " + limit.toString();
-        }
-        try{
-            PreparedStatement preparedStatement = connection.prepareStatement(in);
-            preparedStatement.setString(1, email);
-            preparedStatement.setInt(2, since_id);
-            System.out.println(preparedStatement);
-            ResultSet rs = preparedStatement.executeQuery();
-            while(rs.next()){
-                responseJSON.put(rs.getString(1));
-            }
-        }
-        catch (SQLException e){
-            e.printStackTrace();
-        }
-        return responseJSON;
-    }
     public static JSONArray getFollowers(String email, Connection connection){
-        return getFollowers(email, connection, "desc", null, -1);
-    }
-    public static JSONArray getFollowing(String email, Connection connection, String order, Integer limit, Integer since_id){
         JSONArray responseJSON = new JSONArray();
-        String in = "SELECT u.email FROM follows f JOIN user u on u.id = f.idFollowers JOIN user u1 on u1.id = f.idFollowing where u1.email = ? and u.id > ? order by u1.name " + order;
-        if(limit != null){
-            in += " limit " + limit.toString();
-        }
+        String in = "SELECT u.email FROM follows f JOIN user u on u.id = f.idFollowers JOIN user u1 on " +
+                "u1.id = f.idFollowing where u1.email = ? and f.deleted = false";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(in);
             preparedStatement.setString(1, email);
-            preparedStatement.setInt(2, since_id);
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
             while(rs.next()){
@@ -261,8 +280,24 @@ public class Functions {
         return responseJSON;
     }
     public static JSONArray getFollowing(String email, Connection connection){
-        return getFollowing(email, connection, "desc", null, -1);
+        JSONArray responseJSON = new JSONArray();
+        String in = "SELECT u1.email FROM follows f JOIN user u on u.id = f.idFollowers JOIN user u1 on " +
+                "u1.id = f.idFollowing where u.email = ? and f.deleted = false";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(in);
+            preparedStatement.setString(1, email);
+            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+            while(rs.next()){
+                responseJSON.put(rs.getString(1));
+            }
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+        return responseJSON;
     }
+
     public static String getBody(HttpServletRequest request) throws IOException {
 
         String body = null;
@@ -273,7 +308,7 @@ public class Functions {
             InputStream inputStream = request.getInputStream();
             if (inputStream != null) {
                 bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-                char[] charBuffer = new char[128];
+                char[] charBuffer = new char[1024];
                 int bytesRead = -1;
                 while ((bytesRead = bufferedReader.read(charBuffer)) > 0) {
                     stringBuilder.append(charBuffer, 0, bytesRead);

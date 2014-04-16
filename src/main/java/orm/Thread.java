@@ -40,6 +40,7 @@ public class Thread {
             preparedStatement.setBoolean(7,isDelted);
             preparedStatement.setBoolean(8,isClosed);
             preparedStatement.executeUpdate();
+            System.out.println(preparedStatement);
             ResultSet keys = preparedStatement.getGeneratedKeys();
             keys.next();
             Long id = keys.getLong(1);
@@ -63,6 +64,7 @@ public class Thread {
             PreparedStatement preparedStatement = connection.prepareStatement(in);
             preparedStatement.setLong(1,id);
             preparedStatement.executeUpdate();
+            System.out.println(preparedStatement);
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("thread", id);
             JSONObject out = new JSONObject();
@@ -80,7 +82,7 @@ public class Thread {
         String related = request.getParameter("related");
         Boolean relateUser = false;
         Boolean relateForum = false;
-        Long id = Long.parseLong(request.getParameter("id"));
+        Long id = Long.parseLong(request.getParameter("thread"));
         if (related != null){
             relateUser =  related.contains("user");
             relateForum = related.contains("forum");
@@ -123,7 +125,7 @@ public class Thread {
             limit = Long.parseLong(l);
         }
         String since = request.getParameter("since");
-        Long id = Long.parseLong(request.getParameter("id"));
+        Long id = Long.parseLong(request.getParameter("thread"));
         response.getWriter().println(Functions.postDetails(connection,null,id,order,since,limit,false,false,false));
     }
     public static void open(HttpServletResponse response, HttpServletRequest request, Connection connection) throws IOException{
@@ -136,6 +138,7 @@ public class Thread {
             PreparedStatement preparedStatement = connection.prepareStatement(in);
             preparedStatement.setLong(1,id);
             preparedStatement.executeUpdate();
+            System.out.println(preparedStatement);
             obj.put("code", 0);
             JSONObject t = new JSONObject();
             t.put("thread", id);
@@ -157,6 +160,7 @@ public class Thread {
             PreparedStatement preparedStatement = connection.prepareStatement(in);
             preparedStatement.setLong(1,id);
             preparedStatement.executeUpdate();
+            System.out.println(preparedStatement);
             obj.put("code", 0);
             JSONObject t = new JSONObject();
             t.put("thread", id);
@@ -178,6 +182,7 @@ public class Thread {
             PreparedStatement preparedStatement = connection.prepareStatement(in);
             preparedStatement.setLong(1,id);
             preparedStatement.executeUpdate();
+            System.out.println(preparedStatement);
             obj.put("code", 0);
             JSONObject t = new JSONObject();
             t.put("thread", id);
@@ -194,13 +199,13 @@ public class Thread {
         JSONObject object = (JSONObject) new JSONTokener(json).nextValue();
         Long id = object.getLong("thread");
         String user = object.getString("user");
-        String in = "INSERT INTO subscribe (user_id, thread_id) VALUES(?,?) ON DUPLICATE KEY UPDATE" +
-                " user_id = user_id";
+        String in = "INSERT INTO subscribe (user_id, thread_id) VALUES(?,?) on duplicate key update deleted = false";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(in);
             preparedStatement.setLong(2, id);
             preparedStatement.setLong(1, UserDAO.getByEmail(connection, user).getId());
             preparedStatement.executeUpdate();
+            System.out.println(preparedStatement);
             JSONObject obj = new JSONObject();
             obj.put("thread", id);
             obj.put("user", user);
@@ -219,11 +224,12 @@ public class Thread {
         JSONObject object = (JSONObject) new JSONTokener(json).nextValue();
         Long id = object.getLong("thread");
         String user = object.getString("user");
-        String in = "DELETE FROM subscribe where user_id = ? and thread_id = ?)";
+        String in = "update subscribe set deleted = true where user_id = ? and thread_id = ?";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(in);
             preparedStatement.setLong(2, id);
             preparedStatement.setLong(1, UserDAO.getByEmail(connection, user).getId());
+            System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
             JSONObject obj = new JSONObject();
             obj.put("thread", id);
@@ -251,6 +257,7 @@ public class Thread {
             preparedStatement.setString(1, slug);
             preparedStatement.setString(2, message);
             preparedStatement.setLong(3, id);
+            System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
             JSONObject out = new JSONObject();
             out.put("code", 0);
@@ -268,12 +275,13 @@ public class Thread {
         JSONObject object = (JSONObject) new JSONTokener(json).nextValue();
         try {
             Long vote = object.getLong("vote");
-            Long id = object.getLong("post");
+            Long id = object.getLong("thread");
             String in = "INSERT INTO vote (type,id,value) values (?,?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(in);
             preparedStatement.setInt(1, 2);
             preparedStatement.setLong(2, id);
             preparedStatement.setLong(3, vote);
+            System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
             JSONObject result = new JSONObject();
             result.put("code", 0);

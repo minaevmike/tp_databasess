@@ -55,6 +55,7 @@ public class ThreadFunctions {
             preparedStatement.setLong(1,id);
             preparedStatement.executeQuery();
             ResultSet rs = preparedStatement.executeQuery();
+            System.out.println(preparedStatement);
             rs.next();
             out = rs.getLong(1);
 
@@ -78,7 +79,7 @@ public class ThreadFunctions {
             jsonObject.put("forum", ForumFunctions.forumToJSON(connection, forum,false));
         }
         else {
-            jsonObject.put("forum",forum.getName());
+            jsonObject.put("forum",forum.getShort_name());
         }
         jsonObject.put("id",thread.getId());
         jsonObject.put("isClosed", thread.getIsClosed());
@@ -89,7 +90,7 @@ public class ThreadFunctions {
         jsonObject.put("posts", posts);
         jsonObject.put("slug", thread.getSlug());
         jsonObject.put("title", thread.getTitle());
-        String email = database.UserDAO.getById(connection, forum.getUser()).getEmail();
+        String email = database.UserDAO.getById(connection, thread.getUser()).getEmail();
         if(relateUser){
             jsonObject.put("user", Functions.userDetails(connection,email).getJSONObject("response"));
         }
@@ -106,19 +107,19 @@ public class ThreadFunctions {
     public static JSONObject list(Connection connection, String user, String forum,String since, String order, Long limit,Boolean relateUser,Boolean relateForum){
         JSONObject object = new JSONObject();
         String in="SELECT t.id, t.forum_id, t.title, DATE_FORMAT(t.date,'%Y-%m-%d %H:%i:%s'), t.message, t.slug, t.isDeleted, t.isClosed, t.user_id  from thread t join" +
-                "user u on i.id = t.user_id join forum f on t.forum_id = f.id";
+                " user u on u.id = t.user_id join forum f on t.forum_id = f.id";
         if(user != null){
             in += " where u.email = ?";
         }
         else{
-            in += " where f.forumShortName = ?";
+            in += " where f.shortForumName = ?";
         }
         if(since != null){
             in += " and date > ? ";
         }
         in += " ORDER BY t.date " + order;
         if(limit != null){
-            in += "LIMIT " + limit;
+            in += " LIMIT " + limit;
         }
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(in);
@@ -133,6 +134,7 @@ public class ThreadFunctions {
                 preparedStatement.setString(2, since);
             }
             JSONArray array = new JSONArray();
+            System.out.println(preparedStatement);
             ResultSet rs= preparedStatement.executeQuery();
             while(rs.next()){
                 database.Thread thread = new Thread(rs.getLong(1),rs.getLong(9),rs.getLong(2),rs.getString(3),rs.getString(4),rs.getString(5),

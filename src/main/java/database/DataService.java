@@ -22,7 +22,6 @@ public class DataService {
                         append("user=root&").	    //login
                         append("password=1");		//password
 
-                System.out.append("URL: " + url + "\n");
                 connection = DriverManager.getConnection(url.toString());
             } catch (SQLException | InstantiationException | IllegalAccessException | ClassNotFoundException e) {
                 e.printStackTrace();

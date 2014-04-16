@@ -31,6 +31,7 @@ public class Frontend extends HttpServlet {
         String param = request.getPathInfo();
         String [] params = param.split("/");
         Connection connection = DataService.getConnection();
+        System.out.println(param);
         switch (params[3]){
             case "thread":{
                switch (params[4]){
@@ -48,6 +49,10 @@ public class Frontend extends HttpServlet {
                    }
                    case "remove":{
                        orm.Thread.remove(response,request,connection);
+                       break;
+                   }
+                   case "vote":{
+                       orm.Thread.vote(response,request,connection);
                        break;
                    }
                    case "restore":{
@@ -137,6 +142,38 @@ public class Frontend extends HttpServlet {
         Connection connection = DataService.getConnection();
         System.out.println(param);
         switch (params[3]){
+            case "clear":{
+                try{
+                    PreparedStatement ups = connection.prepareStatement("select concat(\'TRUNCATE TABLE \', table_schema" +
+                        ",\'.\',TABLE_NAME,\';\') FROM INFORMATION_SCHEMA.TABLES where table_schema = \'forums\';");
+                    ResultSet resultSet = ups.executeQuery();
+                    connection.setAutoCommit(false);
+                    PreparedStatement FKoff = connection.prepareStatement("SET FOREIGN_KEY_CHECKS=0");
+                    FKoff.executeUpdate();
+                    while (resultSet.next()){
+                        PreparedStatement t = connection.prepareStatement(resultSet.getString(1));
+                        t.executeUpdate();
+                    }
+                    PreparedStatement FKon = connection.prepareStatement("SET FOREIGN_KEY_CHECKS=1");
+                    FKon.executeUpdate();
+                    connection.commit();
+                    connection.setAutoCommit(true);
+                    response.getWriter().println("OK");
+                }
+                catch (SQLException e){
+                    try{
+                        connection.rollback();
+                    }
+                    catch (SQLException ex){
+                        ex.printStackTrace();
+                        response.getWriter().println("Not good at all");
+
+                    }
+                    e.printStackTrace();
+                    response.getWriter().println("Ne OK");
+                }
+                break;
+            }
             case "thread":{
                 switch (params[4]){
                     case "details":{
@@ -168,6 +205,10 @@ public class Frontend extends HttpServlet {
                         User.listFollowing(response,request,connection);
                         break;
                     }
+                    case "listPosts":{
+                        orm.User.listPosts(response,request,connection);
+                        break;
+                    }
 
                 }
                 break;
@@ -175,6 +216,7 @@ public class Frontend extends HttpServlet {
             case "post":{
                 switch (params[4]){
                     case "details":{
+                        orm.Post.details(response,request,connection);
                         break;
                     }
                     case "list":{
@@ -196,6 +238,10 @@ public class Frontend extends HttpServlet {
                     }
                     case "listUsers":{
                         orm.Forum.listUsers(response,request,connection);
+                        break;
+                    }
+                    case "listThreads":{
+                        orm.Forum.listThreads(response,request,connection);
                         break;
                     }
                 }

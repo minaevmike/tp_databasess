@@ -40,6 +40,7 @@ public class ForumFunctions {
             PreparedStatement preparedStatement = connection.prepareStatement(in);
             preparedStatement.setString(1, short_name);
             preparedStatement.setLong(2, since_id);
+            System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
             while(rs.next()){
                 out.put(Functions.userDetails(connection, rs.getLong(1)).getJSONObject("response"));

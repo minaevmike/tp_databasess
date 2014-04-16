@@ -20,7 +20,7 @@ public class Post {
         try{
             String in = "INSERT INTO post (parent, isApproved, isHighlighted, isEdited, isSpam, isDeleted, date, thread_id, message,user_id,forum) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(in, PreparedStatement.RETURN_GENERATED_KEYS);
-            Integer parent = Functions.getOptionalI(object, "parent");
+            Long parent = Functions.getOptionalL(object, "parent");
             if(parent == null){
                 preparedStatement.setNull(1, Types.NULL);
             }
@@ -35,7 +35,8 @@ public class Post {
             preparedStatement.setString(7, object.getString("date"));
             preparedStatement.setInt(8, object.getInt("thread"));
             preparedStatement.setString(9, object.getString("message"));
-            preparedStatement.setLong(10, UserDAO.getByEmail(connection, object.getString("user")).getId());
+            Long uId = UserDAO.getByEmail(connection, object.getString("user")).getId();
+            preparedStatement.setLong(10, uId);
             preparedStatement.setString(11, object.getString("forum"));
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
@@ -43,8 +44,9 @@ public class Post {
             keys.next();
             Long id = keys.getLong(1);
             JSONObject result = new JSONObject();
-            //TODO : REFACTOR, THIS IF FOR TESTING
-            database.Post post = PostDAO.getPostById(connection, id);
+            database.Post post = new database.Post(id,parent,Functions.getOptionalB(object, "isApproved"),Functions.getOptionalB(object,"isHighlighted"),
+                    Functions.getOptionalB(object,"isEdited"),Functions.getOptionalB(object,"isSpam"),Functions.getOptionalB(object, "isDeleted"),
+                    object.getString("date"),object.getLong("thread"),object.getString("message"),uId,object.getString("forum"));
             result.put("code", 0);
             result.put("response",  Functions.postToJSON(connection,post,false,false,false));
             response.getWriter().println(result);
@@ -78,10 +80,11 @@ public class Post {
         JSONObject object = (JSONObject) new JSONTokener(json).nextValue();
         try {
             Integer id = object.getInt("post");
-            String in = "update post set removed = true where id = ?";
+            String in = "update post set isDeleted = true where id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(in);
             preparedStatement.setInt(1,id);
             preparedStatement.executeUpdate();
+            System.out.println(preparedStatement);
             JSONObject result = new JSONObject();
             result.put("code", 0);
             JSONObject responseJSON = new JSONObject();
@@ -100,10 +103,11 @@ public class Post {
         JSONObject object = (JSONObject) new JSONTokener(json).nextValue();
         try {
             Integer id = object.getInt("post");
-            String in = "update post set removed = false where id = ?";
+            String in = "update post set isDeleted = false where id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(in);
             preparedStatement.setInt(1,id);
             preparedStatement.executeUpdate();
+            System.out.println(preparedStatement);
             JSONObject result = new JSONObject();
             result.put("code", 0);
             JSONObject responseJSON = new JSONObject();
@@ -127,6 +131,7 @@ public class Post {
             PreparedStatement preparedStatement = connection.prepareStatement(in);
             preparedStatement.setString(1,message);
             preparedStatement.setLong(2, id);
+            System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
             JSONObject result = new JSONObject();
             result.put("code", 0);
@@ -137,7 +142,22 @@ public class Post {
             e.printStackTrace();
             response.getWriter().println(Functions.errorMsg("SMth go wrong"));
         }
-    } 
+    }
+
+    public static void details(HttpServletResponse response, HttpServletRequest request, Connection connection) throws IOException{
+        Long id = Long.parseLong(request.getParameter("post"));
+        String related = request.getParameter("related");
+        Boolean relateUser =false;
+        Boolean relateForum=false;
+        Boolean relateThread=false;
+        if (related != null){
+            relateUser =  related.contains("user");
+            relateForum = related.contains("forum");
+            relateThread = related.contains("thread");
+        }
+        response.getWriter().println(Functions.postDetails(connection,id,"desc",null,null,relateUser,relateThread,relateForum));
+    }
+
     public static void vote(HttpServletResponse response, HttpServletRequest request, Connection connection) throws IOException{
         String json = Functions.getBody(request);
         JSONObject object = (JSONObject) new JSONTokener(json).nextValue();
@@ -149,6 +169,7 @@ public class Post {
             preparedStatement.setInt(1, 1);
             preparedStatement.setLong(2, id);
             preparedStatement.setLong(3, vote);
+            System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
             JSONObject result = new JSONObject();
             result.put("code", 0);

@@ -29,6 +29,7 @@ public class Forum {
             preparedStatement.setString(2, short_name);
             preparedStatement.setLong(3, UserDAO.getByEmail(connection, email).getId());
             preparedStatement.executeUpdate();
+            System.out.println(preparedStatement);
             ResultSet keys = preparedStatement.getGeneratedKeys();
             keys.next();
             Long id = keys.getLong(1);
@@ -117,24 +118,24 @@ public class Forum {
     }
 
     public static void listThreads(HttpServletResponse response, HttpServletRequest request, Connection connection) throws IOException {
-                String l = request.getParameter("limit");
-                String order = request.getParameter("order");
-                if(order == null){
-                    order = "desc";
-                }
-                Long limit = null;
-                if(l != null){
-                    limit = Long.parseLong(l);
-                }
-                String since = request.getParameter("since");
-                String related = request.getParameter("related");
-                String short_name = request.getParameter("forum");
-                Boolean relateUser = false;
-                Boolean relateForum = false;
-                if (related != null){
-                    relateUser =  related.contains("user");
-                    relateForum = related.contains("forum");
-                }
+        String l = request.getParameter("limit");
+        String order = request.getParameter("order");
+        if(order == null){
+            order = "desc";
+        }
+        Long limit = null;
+        if(l != null){
+            limit = Long.parseLong(l);
+        }
+        String since = request.getParameter("since");
+        String related = request.getParameter("related");
+        String short_name = request.getParameter("forum");
+        Boolean relateUser = false;
+        Boolean relateForum = false;
+        if (related != null){
+            relateUser =  related.contains("user");
+            relateForum = related.contains("forum");
+        }
         response.getWriter().println(ThreadFunctions.list(connection,null,short_name,since,order,limit,relateUser,relateForum));
     }
 }
